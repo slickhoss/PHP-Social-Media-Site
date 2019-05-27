@@ -55,11 +55,10 @@
 				</div>
 			</div>
 		</div>
-	</body>
-	<!-- END BODY -->
-	
+				
 	<!-- JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js" type="text/javascript"></script>
-	
+	</body>
+	<!-- END BODY -->	
 </html>
