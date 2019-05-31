@@ -1,5 +1,18 @@
 <?php 
 
+if(count($_POST) > 0 )
+{
+
+	$tmp = [];
+	$tmp['firstName'] = $_POST['firstName'];
+	$tmp['lastName'] = $_POST['lastName'];
+	$tmp['dob'] = $_POST['dob'];
+	$tmp['phoneNumber'] = $_POST['phoneNumber'];
+	$tmp['password'] = $_POST['password'];
+
+	
+ 
+}
 
 ?>
 <!DOCTYPE html>
@@ -45,10 +58,10 @@
 											<input class="form-control" name="dob" placeHolder="Date of Birth" type="text">
 										</div>
 										<div class="form-group">
-											<input class="form-control" name="password" placeHolder="Password" type="password">
+											<input class="form-control" name="phoneNumber" placeHolder="Phone#" type="phone">
 										</div>
 										<div class="form-group">
-											<input class="form-control" name="phoneNumber" placeHolder="phoneNumber" type="text">
+											<input class="form-control" name="password" placeHolder="Password" type="password">
 										</div>
 										<input type="submit" class="btn btn-lg btn-info btn-block" value="Sign Up!">
 									</fieldset>

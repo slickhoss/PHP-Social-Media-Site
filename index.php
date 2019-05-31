@@ -6,7 +6,7 @@
     <!--BEGIN HEAD -->
     <head>
         <title></title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="styles`heet">
         <link href="css/font-awesome.min.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
     </head>
