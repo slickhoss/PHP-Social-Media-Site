@@ -47,6 +47,19 @@ function checkPhoneNumberFormat($array)
     }
 }
 
+function checkPassword($array)
+{
+    $regexPattern0 = '/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])/';
+    if(preg_match($regexPattern0, $array['password']))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 //function to display errorMessage in an element
 function errorMessage ($param1)
 {

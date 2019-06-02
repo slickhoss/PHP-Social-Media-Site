@@ -17,7 +17,14 @@ if(count($_POST) > 0 )
 			
 			if(checkPhoneNumberFormat($tmp))
 			{
-				writeCredentials($tmp);
+				if(checkPassword($tmp))
+				{
+					writeCredentials($tmp);
+				}
+				else
+				{
+					$message = errorMessage("Passmust must include an upper, lowercase and a number");
+				}
 			}
 			else
 			{
