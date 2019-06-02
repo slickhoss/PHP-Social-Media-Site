@@ -5,10 +5,10 @@
 <html>
     <!--BEGIN HEAD -->
     <head>
-        <title></title>
-        <link href="css/bootstrap.min.css" rel="styles`heet">
-        <link href="css/font-awesome.min.css" rel="stylesheet">
-        <link href="css/style.css" rel="stylesheet">
+        <title>Noob Book</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+		<link href="css/style.css" rel="stylesheet">
     </head>
     <!--END HEAD-->
     
@@ -78,13 +78,12 @@
 
         <!--NEW POST PANEL-->
         
-
+    <!-- JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->	
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
         <!--END NEW POST FORM-->
     </body>
     <!--END BODY-->       
 
-    <!-- JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->	
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
    
 </html>

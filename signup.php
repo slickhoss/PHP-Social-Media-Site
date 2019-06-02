@@ -1,5 +1,6 @@
 <?php 
-
+include('functions.php');
+$message = "";
 if(count($_POST) > 0 )
 {
 
@@ -9,9 +10,29 @@ if(count($_POST) > 0 )
 	$tmp['dob'] = $_POST['dob'];
 	$tmp['phoneNumber'] = $_POST['phoneNumber'];
 	$tmp['password'] = $_POST['password'];
-
-	
- 
+	if(checkInputStrings($tmp))
+	{
+		if(checkDateFormat($tmp))
+		{
+			
+			if(checkPhoneNumberFormat($tmp))
+			{
+				writeCredentials($tmp);
+			}
+			else
+			{
+				$message = errorMessage("Please provide a valid phone number");
+			}
+		}
+		else
+		{
+			$message =errorMessage("Date Must be in format of mm-dd-yyyy");
+		}
+	}
+	else
+	{
+		$message = errorMessage("Please provide all fields");
+	}
 }
 
 ?>
@@ -35,7 +56,7 @@ if(count($_POST) > 0 )
 				<div class="row">
 					<div class="col-md-4 col-md-offset-4">
 						<h1 class="login-panel text-center text-muted">noobBook</h1>
-						<?php echo "test";?>
+						<?php echo $message;?>
 						
 						<!-- CREATE ACCOUNT PANEL -->	
 						<div class="login-panel panel-default">
