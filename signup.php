@@ -1,9 +1,9 @@
-<?php 
+<?php
+session_start(); 
 include('functions.php');
 $message = "";
 if(count($_POST) > 0 )
 {
-
 	$tmp = [];
 	$tmp['firstName'] = $_POST['firstName'];
 	$tmp['lastName'] = $_POST['lastName'];
@@ -20,10 +20,12 @@ if(count($_POST) > 0 )
 				if(checkPassword($tmp))
 				{
 					writeCredentials($tmp);
+					$_SESSION['verified'] = 1;
+					header('Location: index.php');
 				}
 				else
 				{
-					$message = errorMessage("Passmust must include an upper, lowercase and a number");
+					$message = errorMessage("Passmust must include an uppercase, lowercase and a number");
 				}
 			}
 			else
@@ -41,7 +43,6 @@ if(count($_POST) > 0 )
 		$message = errorMessage("Please provide all fields");
 	}
 }
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -107,7 +108,5 @@ if(count($_POST) > 0 )
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>	
 	</body>
-	<!-- END BODY -->
-	
-	
+	<!-- END BODY -->	
 </html>

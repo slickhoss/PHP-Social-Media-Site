@@ -1,4 +1,11 @@
 <?php
+session_start();
+if(!isset($_SESSION['verified']))
+{
+    header('Location: login.php');
+    exit();
+}
+
 ?>
 
 <!DOCTYPE html>

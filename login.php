@@ -48,9 +48,9 @@
 								</form>
 							</div>
 							<!-- END LOGIN FORM -->
-			
 						</div>
 						<!-- END LOGIN PANEL -->
+						<a class='btn btn-sm btn-default' href='signup.php'>Sign Up</a>
 					</div>
 				</div>
 			</div>
