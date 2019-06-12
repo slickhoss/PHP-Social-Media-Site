@@ -83,8 +83,37 @@ if(!isset($_SESSION['verified']))
         </div>
         <!--END LANDING PANEL-->
 
-        <!--NEW POST PANEL-->
-        
+    <!--NEW POST FORM-->
+    <div id="newPost" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <form role="form" action="index.php" method="post" enctype="multipart/form-data">
+                <div class="modal-content">
+                
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+                        <h4 class="modal-title">New Post</h4>
+                    </div>
+                    
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="title" placeholder="Title">
+                        </div>
+                        <div class="form-group">
+                            <label>Caption</label>
+                            <textarea class="form-control" rows="3" name="caption"></textarea>
+                        </div>
+                        <div class="form-group"> 
+                            
+                        </div>
+                    </div>
+
+                </div>
+            </form>    
+        </div>
+    </div> 
+ 
+
+
     <!-- JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->	
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
