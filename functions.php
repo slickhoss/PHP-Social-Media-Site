@@ -21,6 +21,18 @@ function checkInputStrings($array)
     }
 }
 
+function checkName ($string)
+{
+    if(empty($string))
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+
 function checkDateFormat($array)
 {
     $regexPattern0 = '/^[0-9]{2}-[0-9]{2}-[0-9]{4}/';

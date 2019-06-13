@@ -103,10 +103,22 @@ if(!isset($_SESSION['verified']))
                             <textarea class="form-control" rows="3" name="caption"></textarea>
                         </div>
                         <div class="form-group"> 
-                            
+                            <label>Color</label>
+                            <select class="form-control" name="color"> 
+                                <option value="1">Blue</option>
+                                <option value="2">Red</option>
+                                <option value="3">Yellow</option>
+                            </select>
+                        </div>
+                        <div class="form-group"> 
+                            <label>Image</label>
+                            <input type="file" name="image">
                         </div>
                     </div>
-
+                    <div class="modal-footer"> 
+                        <button type="button" class="btn btn-default" value="Close" data-dismiss="modal">Close</button>
+                        <input type="submit"  class="btn btn-primary" value="Submit">
+                    </div>
                 </div>
             </form>    
         </div>

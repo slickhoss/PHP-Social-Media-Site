@@ -2,6 +2,13 @@
 session_start(); 
 include('functions.php');
 $message = "";
+
+if(isset($_COOKIE['firstName']) && isset($_COOKIE['lastName']))
+{
+	echo $_COOKIE['firstName'];
+	echo $_COOKIE['lastName'];
+}
+
 if(count($_POST) > 0 )
 {
 	$tmp = [];
@@ -12,30 +19,39 @@ if(count($_POST) > 0 )
 	$tmp['password'] = $_POST['password'];
 	if(checkInputStrings($tmp))
 	{
-		if(checkDateFormat($tmp))
+		if(checkName($tmp['firstName']))
 		{
-			
-			if(checkPhoneNumberFormat($tmp))
-			{
-				if(checkPassword($tmp))
+			setCookie('firstName', $tmp['firstName'], time() + 60*60);
+			if(checkName($tmp['lastName']))		
+			{	
+				setCookie('lastName', $tmp['lastName'], time() + 60*60);
+				if(checkDateFormat($tmp))
 				{
-					writeCredentials($tmp);
-					$_SESSION['verified'] = 1;
-					header('Location: index.php');
+					setCookie('dob', $tmp['dob'], time() + 60*60);
+					if(checkPhoneNumberFormat($tmp))
+					{
+						setCookie('phoneNumber', $tmp['phoneNumber'], time() + 60*60);
+						if(checkPassword($tmp))
+						{
+							writeCredentials($tmp);
+							$_SESSION['verified'] = 1;
+							header('Location: index.php');
+						}
+						else
+						{
+							$message = errorMessage("Password must must include an uppercase, lowercase and a number");
+						}
+					}
+					else
+					{
+						$message = errorMessage("Please provide a valid phone number");
+					}
 				}
 				else
 				{
-					$message = errorMessage("Passmust must include an uppercase, lowercase and a number");
+					$message =errorMessage("Date Must be in format of mm-dd-yyyy");
 				}
 			}
-			else
-			{
-				$message = errorMessage("Please provide a valid phone number");
-			}
-		}
-		else
-		{
-			$message =errorMessage("Date Must be in format of mm-dd-yyyy");
 		}
 	}
 	else
@@ -78,16 +94,21 @@ if(count($_POST) > 0 )
 								<form name="signup" role="form" action="signup.php" method="post">
 									<fieldset>
 										<div class="form-group">
-											<input class="form-control" name="firstName" placeHolder="First Name" type="text" autofocus>										
+											<input class="form-control" name="firstName" placeHolder="First Name" type="text" autofocus 
+											<?php if(isset($_COOKIE['firstName']))	{echo 'value =' . $_COOKIE['firstName'];}?> >										
 										</div>
 										<div class="form-group">
-											<input class="form-control" name="lastName" placeHolder="Last Name" type="text">
+											<input class="form-control" name="lastName" placeHolder="Last Name" type="text"
+											<?php if(isset($_COOKIE['lastName'])) {echo 'value='. $_COOKIE['lastName'];}?> >
 										</div>
 										<div class="form-group">
-											<input class="form-control" name="dob" placeHolder="Date of Birth" type="text">
+											<input class="form-control" name="dob" placeHolder="Date of Birth" type="text"
+											<?php if(isset($_COOKIE['dob'])) {echo 'value='. $_COOKIE['dob'];}?> >
 										</div>
 										<div class="form-group">
-											<input class="form-control" name="phoneNumber" placeHolder="Phone#" type="phone">
+											<input class="form-control" name="phoneNumber" placeHolder="Phone#" type="phone"
+											<?php if(isset($_COOKIE['phoneNumber'])) {echo 'value='. $_COOKIE['phoneNumber'];}?> >
+											
 										</div>
 										<div class="form-group">
 											<input class="form-control" name="password" placeHolder="Password" type="password">
