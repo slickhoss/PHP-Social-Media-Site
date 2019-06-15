@@ -2,7 +2,7 @@
 session_start(); 
 include('functions.php');
 $message = "";
-
+	
 if(isset($_COOKIE['firstName']) && isset($_COOKIE['lastName']))
 {
 	echo $_COOKIE['firstName'];

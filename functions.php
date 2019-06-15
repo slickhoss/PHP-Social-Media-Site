@@ -4,7 +4,7 @@
 function writeCredentials ($tmp)
 {
     $fp = fopen("accounts.txt", "a+");
-    fwrite($fp, $tmp['firstName'] . '|' . $tmp['lastName'] . '|' . $tmp['dob'] . '|' . $tmp['phoneNumber'] . '|' . $tmp['password'] . "\n");
+    fwrite($fp, $tmp['firstName'] . '|' . $tmp['lastName'] . '|' . $tmp['dob'] . '|' . $tmp['phoneNumber'] . '|' . $tmp['password'] . '|' . "\n" );
     fclose($fp);
 }
 
@@ -88,21 +88,21 @@ function errorMessage ($param1)
 
 function checkCredentials ($userLogin, $userPassword)
 {
+    echo 'checkCredentials called' . "<BR>";
     if(file_exists('accounts.txt'))
     {
         $accounts = file('accounts.txt');
         foreach($accounts as $account)
         {
             $credentials = preg_split('/\|/', $account);
-            if($userLogin == $credentials[3] && $userPassword == $credentials[4])
+            echo $credentials[3] . '<br>';
+            echo $credentials[4] . '<br>';
+            if($credentials[3] == $userLogin && $credentials[4] == $userPassword)
             {
+                echo 'login matches';
                 return true;
             }
-            else
-            {
-                return false;
-            }
-        }
-    }
+        }   
+    }   
 }
 ?>

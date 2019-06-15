@@ -2,10 +2,9 @@
 session_start();
 if(!isset($_SESSION['verified']))
 {
-    header('Location: login.php');
+    header("Location: login.php");
     exit();
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -76,6 +75,9 @@ if(!isset($_SESSION['verified']))
                             </div>
 
                         </div>
+                        <a href="login.php">
+                        <button class="btn btn-sm" value="log off">LogoFF</button>
+                        </a>
                     </div>
                 </div>
                 <!--END TEMPLATE POST-->

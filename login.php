@@ -1,11 +1,7 @@
 <?php 
 include('functions.php');
 session_start();
-if(isset($_SESSION['verified']))
-{
-	header("Location : index.php");
-	exit();
-}
+session_abort();
 
 if(isset($_POST['rememberMe']))
 {
@@ -25,8 +21,7 @@ if(count($_POST) > 0)
 	if(checkCredentials($tmp['userLogin'], $tmp['password']) == true)
 	{
 		$_SESSION['verified'] = 1;
-		header('Location : index.php');
-		exit();
+		header("Location: index.php");
 	}
 }
 ?>
