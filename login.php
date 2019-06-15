@@ -1,9 +1,33 @@
 <?php 
+include('functions.php');
 session_start();
 if(isset($_SESSION['verified']))
 {
 	header("Location : index.php");
 	exit();
+}
+
+if(isset($_POST['rememberMe']))
+{
+	setcookie('rememberMe', 1, time() + 60 * 60);
+	$_COOKIE['rememberMe'] = 1;	
+}
+else
+{
+	$_COOKIE['rememberMe'] = null;
+}
+if(count($_POST) > 0)
+{
+	echo isset($_POST['rememberMe']);
+	$tmp = [];
+	$tmp['userLogin'] = $_POST['userLogin'];
+	$tmp['password'] = $_POST['password'];
+	if(checkCredentials($tmp['userLogin'], $tmp['password']) == true)
+	{
+		$_SESSION['verified'] = 1;
+		header('Location : index.php');
+		exit();
+	}
 }
 ?>
 
@@ -41,13 +65,14 @@ if(isset($_SESSION['verified']))
 								<form name ="login" role="form" action="login.php" method="post">
 									<fieldset>
 										<div class="form-group">
-											<input class="form-control" name="phoneNumber" placeHolder="Phone Number">
+											<input class="form-control" name="userLogin" placeHolder="User Login">
 										</div>
 										<div class="form-group">
 											<input class="form-control" name="password" placeHolder="Password">
 										</div>
 										<div class="form-group">
-											<input type="checkbox" value="1" name="rememberMe">Remember Me
+											<input type="checkbox" name="rememberMe" 
+											<?php if(isset($_COOKIE['rememberMe'])) {$_POST['rememberMe'] = 1; echo 'checked';}?> >Remember Me
 										</div>
 										<input type="submit" class="btn btn-lg btn-success btn-block" value="login.php">
 									</fieldset>

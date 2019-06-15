@@ -86,4 +86,23 @@ function errorMessage ($param1)
     }
 }
 
+function checkCredentials ($userLogin, $userPassword)
+{
+    if(file_exists('accounts.txt'))
+    {
+        $accounts = file('accounts.txt');
+        foreach($accounts as $account)
+        {
+            $credentials = preg_split('/\|/', $account);
+            if($userLogin == $credentials[3] && $userPassword == $credentials[4])
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
+}
 ?>
