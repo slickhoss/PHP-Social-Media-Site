@@ -72,20 +72,6 @@ function checkPassword($array)
     }
 }
 
-//function to display errorMessage in an element
-function errorMessage ($param1)
-{
-    if(!empty($param1))
-    {
-        return "
-            <div class='alert alert-warning alert-dismissable text-center'>
-                <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-                ".$param1."
-            </div>
-        ";
-    }
-}
-
 function checkCredentials ($userLogin, $userPassword)
 {
     echo 'checkCredentials called' . "<BR>";
@@ -104,5 +90,30 @@ function checkCredentials ($userLogin, $userPassword)
             }
         }   
     }   
+}
+function checkPost($array)
+{
+    if(empty($array['title']) || empty($array['caption']) || empty($array['color']) || empty($array['image']) || empty($array['postedTime']))
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+
+//function to display errorMessage in an element
+function errorMessage ($param1)
+{
+    if(!empty($param1))
+    {
+        return "
+            <div class='alert alert-warning alert-dismissable text-center'>
+                <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+                ".$param1."
+            </div>
+        ";
+    }
 }
 ?>

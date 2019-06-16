@@ -1,8 +1,7 @@
 <?php 
 include('functions.php');
 session_start();
-session_abort();
-
+$message = '';
 if(isset($_POST['rememberMe']))
 {
 	setcookie('rememberMe', 1, time() + 60 * 60);
@@ -22,6 +21,10 @@ if(count($_POST) > 0)
 	{
 		$_SESSION['verified'] = 1;
 		header("Location: index.php");
+	}
+	else
+	{
+		$message =  errorMessage('Wrong email/password');
 	}
 }
 ?>
@@ -46,8 +49,7 @@ if(count($_POST) > 0)
 				<div class="row">	
 					<div class="col-md-4 col-md-offset-4">
 						<h1 class="login-panel text-center text-muted">noobBook</h1>
-						
-						<?php echo "test"; ?>
+						<?php echo $message; ?>			
 						<!-- BEGIN LOGIN PANEL -->
 						<div class="login-panel panel panel-default">
 							

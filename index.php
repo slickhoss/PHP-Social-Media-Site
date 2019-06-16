@@ -1,9 +1,38 @@
 <?php
+include('functions.php');
 session_start();
+$message = "";
 if(!isset($_SESSION['verified']))
 {
     header("Location: login.php");
     exit();
+}
+if(count($_POST) > 0)
+{
+    $tmp = [];
+    $tmp['title'] = $_POST['title'];
+    $tmp['caption'] = $_POST['caption'];
+    $tmp['color'] = $_POST['color'];
+    $tmp['image'] = $_FILES['image']['name'];
+    $tmp['postedTime'] = time();
+    if(checkPost($tmp))
+    {
+        echo 'good';
+        if($_FILES['image']['type'] == 'image/jpeg' || $_FILES['image']['type'] == 'image/png')
+        {
+            $targetDirectory = 'uploads/';
+            $savedLocation = $targetDirectory . $tmp['image'];
+            move_uploaded_file($_FILES['image']['tmp_name'], $savedLocation);
+        }
+        else
+        {
+            $message = errorMessage('File must be type jpeg ');
+        }
+    }
+    else
+    {
+        $message = errorMessage("Please complete all fields");
+    }
 }
 ?>
 
@@ -45,11 +74,11 @@ if(!isset($_SESSION['verified']))
                 <!--TEMPLATE POST-->
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3">
-                        <div class="panel panel-info">
-                            
-                            <div class="panel-heading">
-                                <span>
-                                    First Post!
+                        <?php echo $message; ?>
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                                <span>                                  
+                                  First Post!
                                 </span>
                                 <span class="pull-right text-muted">
                                     <?php echo "test";?>
