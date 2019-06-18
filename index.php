@@ -1,12 +1,13 @@
 <?php
 include('functions.php');
 session_start();
-$message = "";
 if(!isset($_SESSION['verified']))
 {
     header("Location: login.php");
     exit();
 }
+$message = "";
+$posts = populatePosts();
 if(count($_POST) > 0)
 {
     $tmp = [];
@@ -20,6 +21,9 @@ if(count($_POST) > 0)
         echo 'good';
         if($_FILES['image']['type'] == 'image/jpeg' || $_FILES['image']['type'] == 'image/png')
         {
+            //save postdData
+            writePosts($tmp);
+            //upload file
             $targetDirectory = 'uploads/';
             $savedLocation = $targetDirectory . $tmp['image'];
             move_uploaded_file($_FILES['image']['tmp_name'], $savedLocation);
@@ -75,19 +79,19 @@ if(count($_POST) > 0)
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3">
                         <?php echo $message; ?>
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                                <span>                                  
-                                  First Post!
-                                </span>
-                                <span class="pull-right text-muted">
-                                    <?php echo "test";?>
-                                </span>
-                            </div>
-                            
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                    <span>                                  
+                                    First Post!
+                                    </span>
+                                    <span class="pull-right text-muted">
+                                        <?php echo "test";?>
+                                    </span>
+                                </div>
+                                
                             <div class="panel-body">
                                 <p class="text-muted">
-                                    Posted on 
+                                        Posted on 
                                 </p>
                                 <p>
                                     <?php echo "content";?>
@@ -102,14 +106,64 @@ if(count($_POST) > 0)
                                     Posted by : <?php echo "john doe";?>
                                 </p>
                             </div>
-
                         </div>
-                        <a href="login.php">
+                    </div>
+                </div>      
+                <!--END TEMPLATE POST-->
+
+
+                <?php
+                if(isset($posts))
+                {
+                    foreach($posts as $post)
+                    {
+                        $postData = preg_split('/\|/', $post);
+                        echo '
+                            
+                <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <?php echo $message; ?>
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                                <span>                                  
+                                First Post!
+                                </span>
+                                <span class="pull-right text-muted">
+                                    <?php echo "test";?>
+                                </span>
+                            </div>
+                            
+                        <div class="panel-body">
+                            <p class="text-muted">
+                                    Posted on 
+                            </p>
+                            <p>
+                                <?php echo "content";?>
+                            </p>
+                            <div class="image-box">
+                                <img class="img-thumbnail img-responsive">
+                            </div>
+                        </div>
+                        
+                        <div class="panel-footer">  
+                            <p>
+                                Posted by : <?php echo "john doe";?>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>     
+                            ';
+                    }
+                }
+                ?>  
+
+                      <a href="login.php">
                         <button class="btn btn-sm" value="log off">LogoFF</button>
                         </a>
                     </div>
                 </div>
-                <!--END TEMPLATE POST-->
+
             </div>
         </div>
         <!--END LANDING PANEL-->

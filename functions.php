@@ -4,7 +4,14 @@
 function writeCredentials ($tmp)
 {
     $fp = fopen("accounts.txt", "a+");
-    fwrite($fp, $tmp['firstName'] . '|' . $tmp['lastName'] . '|' . $tmp['dob'] . '|' . $tmp['phoneNumber'] . '|' . $tmp['password'] . '|' . "\n" );
+    fwrite($fp, $tmp['firstName'] . '|' . $tmp['lastName'] . '|' . $tmp['dob'] . '|' . $tmp['phoneNumber'] . '|' . $tmp['password'] . PHP_EOL);
+    fclose($fp);
+}
+
+function writePosts ($array)
+{
+    $fp = fopen("posts.txt", "a+");
+    fwrite($fp, $array['title'] . '|' . $array['caption'] . '|' . $array['color'] . '|' . $array['image'] . '|' . $array['postedTime'] . PHP_EOL);
     fclose($fp);
 }
 
@@ -114,6 +121,14 @@ function errorMessage ($param1)
                 ".$param1."
             </div>
         ";
+    }
+}
+
+function populatePosts ()
+{
+    if(file_exists('posts.txt'))
+    {
+        return file('posts.txt');
     }
 }
 ?>
