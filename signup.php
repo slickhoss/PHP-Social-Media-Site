@@ -2,7 +2,7 @@
 session_start(); 
 include('functions.php');
 $message = "";
-	
+
 if(isset($_COOKIE['firstName']) && isset($_COOKIE['lastName']))
 {
 	echo $_COOKIE['firstName'];
@@ -118,7 +118,7 @@ if(count($_POST) > 0 )
 								</form>
 							</div>
 						</div>
-				           <!-- END CREATE ACCOUNT FORM -->
+				        	<!-- END CREATE ACCOUNT FORM -->
 					</div>
 				</div>
 			</div>

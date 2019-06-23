@@ -17,8 +17,10 @@ if(count($_POST) > 0)
 	$tmp = [];
 	$tmp['userLogin'] = $_POST['userLogin'];
 	$tmp['password'] = $_POST['password'];
+	echo getNames($tmp['userLogin'], $tmp['password']);
 	if(checkCredentials($tmp['userLogin'], $tmp['password']) == true)
 	{
+		$_SESSION['name'] = getNames($tmp['userLogin'], $tmp['password']);
 		$_SESSION['verified'] = 1;
 		header("Location: index.php");
 	}
@@ -26,6 +28,7 @@ if(count($_POST) > 0)
 	{
 		$message =  errorMessage('Wrong email/password');
 	}
+	
 }
 ?>
 

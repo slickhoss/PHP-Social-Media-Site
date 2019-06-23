@@ -6,7 +6,13 @@ if(!isset($_SESSION['verified']))
     header("Location: login.php");
     exit();
 }
+if(isset($_SESSION['name']))
+{
+    echo $_SESSION['name'];
+}
 $message = "";
+echo date_default_timezone_get();
+date_default_timezone_set("Canada/Pacific");
 $posts = populatePosts();
 if(count($_POST) > 0)
 {
@@ -118,6 +124,11 @@ if(count($_POST) > 0)
                     foreach($posts as $post)
                     {
                         $postData = preg_split('/\|/', $post);
+                        foreach($postData as $element)
+                        {
+                            echo $element;
+                        }
+                        echo time();
                         echo '
                             
                 <div class="row">
@@ -126,28 +137,28 @@ if(count($_POST) > 0)
                     <div class="panel panel-info">
                         <div class="panel-heading">
                                 <span>                                  
-                                First Post!
+                                    ' . $postData[0] .'  
                                 </span>
                                 <span class="pull-right text-muted">
-                                    <?php echo "test";?>
+                                    ' . datePeriod($postData[4]) . '
                                 </span>
                             </div>
                             
                         <div class="panel-body">
                             <p class="text-muted">
-                                    Posted on 
+                                    Posted on ' . date("F d, Y h:i:s A", floatval($postData[4])) . '
                             </p>
                             <p>
-                                <?php echo "content";?>
+                                ' . $postData[1] . '
                             </p>
                             <div class="image-box">
-                                <img class="img-thumbnail img-responsive">
+                                <img class="img-thumbnail img-responsive" src="' . "uploads/" . $postData[3] . '">
                             </div>
                         </div>
                         
                         <div class="panel-footer">  
                             <p>
-                                Posted by : <?php echo "john doe";?>
+                                Posted by : ' . $_SESSION['name'] . '
                             </p>
                         </div>
                     </div>

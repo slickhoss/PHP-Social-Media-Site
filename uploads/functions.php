@@ -161,19 +161,17 @@ function datePeriod ($time)
     $twoWeeks = 60 * 60 * 24 * 14;
     $timePassed = time() - floatval($time);
 
-    if($day - $timePassed >= 0)
+    if($day - $timePassed <= 0)
     {
         return 'Recently';
     }
-    else if($week - $timePassed >= 0)
+    else if($week - $timePassed  <= 0)
     {
         return 'Within the week';
     }
-    else if($twoWeeks - $timePassed >= 0)
+    else if($twoWeeks - $timePassed <= 0)
     {
         return 'A while ago';
     }
 }
-
-
 ?>
