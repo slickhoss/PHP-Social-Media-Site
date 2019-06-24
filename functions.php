@@ -131,7 +131,7 @@ function checkPost($array)
 }
 
 //function to display errorMessage in an element
-function erorMessage ($param1)
+function errorMessage ($param1)
 {
     if(!empty($param1))
     {
@@ -144,7 +144,15 @@ function erorMessage ($param1)
     }
 }
 
-
+function successMessage($param1)
+{
+    return "
+            <div class='alert alert-success alert-dismissable text-center'>
+                <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+                Thank You John Doe
+            </div>
+    ";
+}
 
 function populatePosts ()
 {
@@ -175,5 +183,37 @@ function datePeriod ($time)
     }
 }
 
+function displayPost ($title, $caption, $author, $image, $postedTime)
+{
+    return "
+            <div class='panel panel-info'>
+                <div class='panel-heading'>
+                    <span>
+                        " . $title . "
+                    </span>
+                    <span class='pull-right text-muted'>
+                        " . datePeriod($postedTime) . "
+                    </span>
+                </div>
 
+                <div class='panel-body'>
+                    <p class='text-muted'>
+                        Posted On " . date("F d, Y h:i:s A", floatval($postedTime)) . "
+                    </p>
+                    <p>
+                    " . $caption . "
+                    </p>
+                    <div class='image-box'>
+                        <img class='img-thumbnail img-responsive' src='uploads/" . $image . "'>
+                    </div>
+                </div>
+
+                <div class='panel-footer'>
+                    <p>
+                        Posted by : " . $author . "
+                    </p>
+                </div>
+            </div>
+    ";
+}
 ?>

@@ -33,10 +33,12 @@ if(count($_POST) > 0)
             $targetDirectory = 'uploads/';
             $savedLocation = $targetDirectory . $tmp['image'];
             move_uploaded_file($_FILES['image']['tmp_name'], $savedLocation);
+            $message = successMessage('good');
+            $posts = populatePosts();
         }
         else
         {
-            $message = errorMessage('File must be type jpeg ');
+            $message = errorMessage('File must be type jpeg or png');
         }
     }
     else
@@ -66,7 +68,7 @@ if(count($_POST) > 0)
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3">
                         <h3 class="login-panel text-center text-muted">
-                            It is now
+                            It is now <?php echo date('l F jS  Y');?>
                         </h3>
                     </div>
                 </div>
@@ -81,10 +83,11 @@ if(count($_POST) > 0)
                 </div>
                 <!--END NEW POST BUTTON-->
 
-                <!--TEMPLATE POST-->
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3">
                         <?php echo $message; ?>
+
+                        <!--TEMPLATE POST-->
                         <div class="panel panel-info">
                             <div class="panel-heading">
                                     <span>                                  
@@ -111,63 +114,26 @@ if(count($_POST) > 0)
                                 <p>
                                     Posted by : <?php echo "john doe";?>
                                 </p>
-                            </div>
+                            </div> 
                         </div>
+
+                        <?php 
+                            if(isset($posts))
+                            {
+                                foreach($posts as $post)
+                                {
+                                    $postData = preg_split('/\|/', $post);
+                                    echo displayPost($postData[0], $postData[1], $_SESSION['name'], $postData[3], $postData[4]);
+                                }
+                            }
+                        ?>
+
                     </div>
                 </div>      
                 <!--END TEMPLATE POST-->
 
 
-                <?php
-                if(isset($posts))
-                {
-                    foreach($posts as $post)
-                    {
-                        $postData = preg_split('/\|/', $post);
-                        foreach($postData as $element)
-                        {
-                            echo $element;
-                        }
-                        echo time();
-                        echo '
-                            
-                <div class="row">
-                <div class="col-md-6 col-md-offset-3">
-                    <?php echo $message; ?>
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                                <span>                                  
-                                    ' . $postData[0] .'  
-                                </span>
-                                <span class="pull-right text-muted">
-                                    ' . datePeriod($postData[4]) . '
-                                </span>
-                            </div>
-                            
-                        <div class="panel-body">
-                            <p class="text-muted">
-                                    Posted on ' . date("F d, Y h:i:s A", floatval($postData[4])) . '
-                            </p>
-                            <p>
-                                ' . $postData[1] . '
-                            </p>
-                            <div class="image-box">
-                                <img class="img-thumbnail img-responsive" src="' . "uploads/" . $postData[3] . '">
-                            </div>
-                        </div>
-                        
-                        <div class="panel-footer">  
-                            <p>
-                                Posted by : ' . $_SESSION['name'] . '
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>     
-                            ';
-                    }
-                }
-                ?>  
+                <!-- where scrip was -->
 
                       <a href="login.php">
                         <button class="btn btn-sm" value="log off">LogoFF</button>
@@ -227,7 +193,5 @@ if(count($_POST) > 0)
     <script src="js/bootstrap.min.js"></script>
         <!--END NEW POST FORM-->
     </body>
-    <!--END BODY-->       
-
-   
+    <!--END BODY-->          
 </html>
